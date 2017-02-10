@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>MultiplexColorSensorTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+.s5 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MultiplexColorSensorTest.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<a name="l1"><span class="ln">1    </span></a><span class="s0">/* 
+<a name="l2"><span class="ln">2    </span></a> * MIT License 
+<a name="l3"><span class="ln">3    </span></a> * 
+<a name="l4"><span class="ln">4    </span></a> * Copyright (c) 2016 Chris D 
+<a name="l5"><span class="ln">5    </span></a> * 
+<a name="l6"><span class="ln">6    </span></a> * Permission is hereby granted, free of charge, to any person obtaining a copy 
+<a name="l7"><span class="ln">7    </span></a> * of this software and associated documentation files (the &quot;Software&quot;), to deal 
+<a name="l8"><span class="ln">8    </span></a> * in the Software without restriction, including without limitation the rights 
+<a name="l9"><span class="ln">9    </span></a> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+<a name="l10"><span class="ln">10   </span></a> * copies of the Software, and to permit persons to whom the Software is 
+<a name="l11"><span class="ln">11   </span></a> * furnished to do so, subject to the following conditions: 
+<a name="l12"><span class="ln">12   </span></a> * 
+<a name="l13"><span class="ln">13   </span></a> * The above copyright notice and this permission notice shall be included in all 
+<a name="l14"><span class="ln">14   </span></a> * copies or substantial portions of the Software. 
+<a name="l15"><span class="ln">15   </span></a> * 
+<a name="l16"><span class="ln">16   </span></a> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+<a name="l17"><span class="ln">17   </span></a> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+<a name="l18"><span class="ln">18   </span></a> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+<a name="l19"><span class="ln">19   </span></a> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+<a name="l20"><span class="ln">20   </span></a> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+<a name="l21"><span class="ln">21   </span></a> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+<a name="l22"><span class="ln">22   </span></a> * SOFTWARE. 
+<a name="l23"><span class="ln">23   </span></a> */</span><span class="s1"> 
+<a name="l24"><span class="ln">24   </span></a> 
+<a name="l25"><span class="ln">25   </span></a></span><span class="s2">package </span><span class="s1">org.firstinspires.ftc.teamcode; 
+<a name="l26"><span class="ln">26   </span></a> 
+<a name="l27"><span class="ln">27   </span></a></span><span class="s2">import </span><span class="s1">com.qualcomm.robotcore.eventloop.opmode.OpMode; 
+<a name="l28"><span class="ln">28   </span></a></span><span class="s2">import </span><span class="s1">com.qualcomm.robotcore.eventloop.opmode.TeleOp; 
+<a name="l29"><span class="ln">29   </span></a> 
+<a name="l30"><span class="ln">30   </span></a></span><span class="s0">/** 
+<a name="l31"><span class="ln">31   </span></a> * Created by Chris D on 10/5/2016 
+<a name="l32"><span class="ln">32   </span></a> * </span><span class="s3">&lt;p&gt;</span><span class="s0"> 
+<a name="l33"><span class="ln">33   </span></a> * In this example, you need to create a device configuration that lists two 
+<a name="l34"><span class="ln">34   </span></a> * &quot;I2C Device&quot;s, one named &quot;mux&quot; and the other named &quot;ada&quot;. There are two 
+<a name="l35"><span class="ln">35   </span></a> * Adafruit color sensors plugged into the I2C multiplexer on ports 2 and 5. 
+<a name="l36"><span class="ln">36   </span></a> */</span><span class="s1"> 
+<a name="l37"><span class="ln">37   </span></a>@TeleOp(name = </span><span class="s4">&quot;MultiplexColorSensorTest&quot;</span><span class="s1">, group = </span><span class="s4">&quot;Iterative Opmode&quot;</span><span class="s1">) 
+<a name="l38"><span class="ln">38   </span></a></span><span class="s0">//@Disabled</span><span class="s1"> 
+<a name="l39"><span class="ln">39   </span></a></span><span class="s2">public class </span><span class="s1">MultiplexColorSensorTest </span><span class="s2">extends </span><span class="s1">OpMode { 
+<a name="l40"><span class="ln">40   </span></a>    <a href="MultiplexColorSensor.java.html">MultiplexColorSensor</a> muxColor; 
+<a name="l41"><span class="ln">41   </span></a>    </span><span class="s2">int</span><span class="s1">[] ports = {</span><span class="s5">2</span><span class="s1">, </span><span class="s5">5</span><span class="s1">}; 
+<a name="l42"><span class="ln">42   </span></a> 
+<a name="l43"><span class="ln">43   </span></a>    @Override 
+<a name="l44"><span class="ln">44   </span></a>    </span><span class="s2">public void </span><span class="s1">init() { 
+<a name="l45"><span class="ln">45   </span></a>        </span><span class="s2">int </span><span class="s1">milliSeconds = </span><span class="s5">48</span><span class="s1">; 
+<a name="l46"><span class="ln">46   </span></a>        muxColor = </span><span class="s2">new <a href="MultiplexColorSensor.java.html">MultiplexColorSensor</a></span><span class="s1">(hardwareMap, </span><span class="s4">&quot;mux&quot;</span><span class="s1">, </span><span class="s4">&quot;ada&quot;</span><span class="s1">, 
+<a name="l47"><span class="ln">47   </span></a>                ports, milliSeconds, 
+<a name="l48"><span class="ln">48   </span></a>                <a href="MultiplexColorSensor.java.html">MultiplexColorSensor</a>.GAIN_16X); 
+<a name="l49"><span class="ln">49   </span></a>    } 
+<a name="l50"><span class="ln">50   </span></a> 
+<a name="l51"><span class="ln">51   </span></a>    @Override 
+<a name="l52"><span class="ln">52   </span></a>    </span><span class="s2">public void </span><span class="s1">init_loop() { 
+<a name="l53"><span class="ln">53   </span></a> 
+<a name="l54"><span class="ln">54   </span></a>    } 
+<a name="l55"><span class="ln">55   </span></a> 
+<a name="l56"><span class="ln">56   </span></a>    @Override 
+<a name="l57"><span class="ln">57   </span></a>    </span><span class="s2">public void </span><span class="s1">start() { 
+<a name="l58"><span class="ln">58   </span></a>        muxColor.startPolling(); 
+<a name="l59"><span class="ln">59   </span></a>    } 
+<a name="l60"><span class="ln">60   </span></a> 
+<a name="l61"><span class="ln">61   </span></a>    @Override 
+<a name="l62"><span class="ln">62   </span></a>    </span><span class="s2">public void </span><span class="s1">loop() { 
+<a name="l63"><span class="ln">63   </span></a>        </span><span class="s2">for </span><span class="s1">(</span><span class="s2">int </span><span class="s1">i = </span><span class="s5">0</span><span class="s1">; i &lt; ports.length; i++) { 
+<a name="l64"><span class="ln">64   </span></a>            </span><span class="s2">int</span><span class="s1">[] crgb = muxColor.getCRGB(ports[i]); 
+<a name="l65"><span class="ln">65   </span></a> 
+<a name="l66"><span class="ln">66   </span></a>            telemetry.addLine(</span><span class="s4">&quot;Sensor &quot; </span><span class="s1">+ ports[i]); 
+<a name="l67"><span class="ln">67   </span></a>            telemetry.addData(</span><span class="s4">&quot;CRGB&quot;</span><span class="s1">, </span><span class="s4">&quot;%5d %5d %5d %5d&quot;</span><span class="s1">, 
+<a name="l68"><span class="ln">68   </span></a>                    crgb[</span><span class="s5">0</span><span class="s1">], crgb[</span><span class="s5">1</span><span class="s1">], crgb[</span><span class="s5">2</span><span class="s1">], crgb[</span><span class="s5">3</span><span class="s1">]); 
+<a name="l69"><span class="ln">69   </span></a>        } 
+<a name="l70"><span class="ln">70   </span></a> 
+<a name="l71"><span class="ln">71   </span></a>        telemetry.update(); 
+<a name="l72"><span class="ln">72   </span></a>    } 
+<a name="l73"><span class="ln">73   </span></a> 
+<a name="l74"><span class="ln">74   </span></a>    @Override 
+<a name="l75"><span class="ln">75   </span></a>    </span><span class="s2">public void </span><span class="s1">stop() { 
+<a name="l76"><span class="ln">76   </span></a> 
+<a name="l77"><span class="ln">77   </span></a>    } 
+<a name="l78"><span class="ln">78   </span></a>} 
+<a name="l79"><span class="ln">79   </span></a></span></pre>
+</body>
+</html>

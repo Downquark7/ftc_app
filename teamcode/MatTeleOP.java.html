@@ -1,0 +1,185 @@
+<html>
+<head>
+<title>MatTeleOP.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MatTeleOP.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">org.firstinspires.ftc.teamcode; 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">com.qualcomm.robotcore.eventloop.opmode.OpMode; 
+<a name="l4"><span class="ln">4    </span></a></span><span class="s0">import </span><span class="s1">com.qualcomm.robotcore.util.Range; 
+<a name="l5"><span class="ln">5    </span></a> 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import static <a href="robotconfig.java.html">org.firstinspires.ftc.teamcode.robotconfig</a></span><span class="s1">.dl; 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s2">/** 
+<a name="l8"><span class="ln">8    </span></a> * Created by Matthew Hotham on 11/5/2016. 
+<a name="l9"><span class="ln">9    </span></a> */</span><span class="s1"> 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s2">//@TeleOp(name = &quot;MattTeleOP&quot;, group = &quot;2016&quot;)</span><span class="s1"> 
+<a name="l11"><span class="ln">11   </span></a> 
+<a name="l12"><span class="ln">12   </span></a></span><span class="s0">public class </span><span class="s1">MatTeleOP </span><span class="s0">extends </span><span class="s1">OpMode { 
+<a name="l13"><span class="ln">13   </span></a> 
+<a name="l14"><span class="ln">14   </span></a>    </span><span class="s0">private final static double </span><span class="s1">buttonPusher_MIN_RANGE = </span><span class="s3">0.40</span><span class="s1">; 
+<a name="l15"><span class="ln">15   </span></a>    </span><span class="s0">private final static double </span><span class="s1">buttonPusher_MAX_RANGE = </span><span class="s3">0.80</span><span class="s1">; 
+<a name="l16"><span class="ln">16   </span></a> 
+<a name="l17"><span class="ln">17   </span></a>    </span><span class="s0">private final static double </span><span class="s1">Tilt_MAX_RANGE = </span><span class="s3">1.00</span><span class="s1">; 
+<a name="l18"><span class="ln">18   </span></a>    </span><span class="s0">private final static double </span><span class="s1">Tilt_MIN_RANGE = </span><span class="s3">0.00</span><span class="s1">; 
+<a name="l19"><span class="ln">19   </span></a> 
+<a name="l20"><span class="ln">20   </span></a>    </span><span class="s0">private final static double </span><span class="s1">capRight_MAX_RANGE = </span><span class="s3">1.00</span><span class="s1">; 
+<a name="l21"><span class="ln">21   </span></a>    </span><span class="s0">private final static double </span><span class="s1">capRight_MIN_RANGE = </span><span class="s3">0.00</span><span class="s1">; 
+<a name="l22"><span class="ln">22   </span></a> 
+<a name="l23"><span class="ln">23   </span></a>    </span><span class="s0">private final static double </span><span class="s1">capLeft_MAX_RANGE = </span><span class="s3">1.00</span><span class="s1">; 
+<a name="l24"><span class="ln">24   </span></a>    </span><span class="s0">private final static double </span><span class="s1">capLeft_MIN_RANGE = </span><span class="s3">0.00</span><span class="s1">; 
+<a name="l25"><span class="ln">25   </span></a> 
+<a name="l26"><span class="ln">26   </span></a>    <a href="robotconfig.java.html">robotconfig</a> robot = </span><span class="s0">new <a href="robotconfig.java.html">robotconfig</a></span><span class="s1">(); 
+<a name="l27"><span class="ln">27   </span></a> 
+<a name="l28"><span class="ln">28   </span></a>    </span><span class="s0">private double </span><span class="s1">tiltPosition; 
+<a name="l29"><span class="ln">29   </span></a>    </span><span class="s0">private double </span><span class="s1">capLeftPosition; 
+<a name="l30"><span class="ln">30   </span></a>    </span><span class="s0">private double </span><span class="s1">capRightPosition; 
+<a name="l31"><span class="ln">31   </span></a> 
+<a name="l32"><span class="ln">32   </span></a>    </span><span class="s0">private double </span><span class="s1">buttonPusherDelta = </span><span class="s3">0.02</span><span class="s1">; 
+<a name="l33"><span class="ln">33   </span></a>    </span><span class="s0">private double </span><span class="s1">tiltDelta = </span><span class="s3">0.02</span><span class="s1">; 
+<a name="l34"><span class="ln">34   </span></a>    </span><span class="s0">private double </span><span class="s1">capLeftDelta = </span><span class="s3">0.01</span><span class="s1">; 
+<a name="l35"><span class="ln">35   </span></a>    </span><span class="s0">private double </span><span class="s1">capRightDelta = </span><span class="s3">0.01</span><span class="s1">; 
+<a name="l36"><span class="ln">36   </span></a> 
+<a name="l37"><span class="ln">37   </span></a>    </span><span class="s0">private double </span><span class="s1">forward = </span><span class="s3">0</span><span class="s1">; 
+<a name="l38"><span class="ln">38   </span></a>    </span><span class="s0">private double </span><span class="s1">right = </span><span class="s3">0</span><span class="s1">; 
+<a name="l39"><span class="ln">39   </span></a>    </span><span class="s0">private double </span><span class="s1">spin = </span><span class="s3">0</span><span class="s1">; 
+<a name="l40"><span class="ln">40   </span></a>    </span><span class="s0">private double </span><span class="s1">spinner = </span><span class="s3">0</span><span class="s1">; 
+<a name="l41"><span class="ln">41   </span></a>    </span><span class="s0">private double </span><span class="s1">reeler = </span><span class="s3">0</span><span class="s1">; 
+<a name="l42"><span class="ln">42   </span></a> 
+<a name="l43"><span class="ln">43   </span></a>    </span><span class="s0">private double </span><span class="s1">vexes; 
+<a name="l44"><span class="ln">44   </span></a>    </span><span class="s0">private double </span><span class="s1">cam; 
+<a name="l45"><span class="ln">45   </span></a> 
+<a name="l46"><span class="ln">46   </span></a>    @Override 
+<a name="l47"><span class="ln">47   </span></a>    </span><span class="s0">public void </span><span class="s1">init() { 
+<a name="l48"><span class="ln">48   </span></a> 
+<a name="l49"><span class="ln">49   </span></a>        robot.init(</span><span class="s0">this</span><span class="s1">); 
+<a name="l50"><span class="ln">50   </span></a>        robot.move(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">); 
+<a name="l51"><span class="ln">51   </span></a>        </span><span class="s2">// Send telemetry message to signify robot waiting;</span><span class="s1"> 
+<a name="l52"><span class="ln">52   </span></a>        telemetry.addData(</span><span class="s4">&quot;Say&quot;</span><span class="s1">, </span><span class="s4">&quot;Hello Driver&quot;</span><span class="s1">); 
+<a name="l53"><span class="ln">53   </span></a>        updateTelemetry(telemetry); 
+<a name="l54"><span class="ln">54   </span></a>        robot.pushButton(</span><span class="s3">0</span><span class="s1">); 
+<a name="l55"><span class="ln">55   </span></a>        tiltPosition = </span><span class="s3">0.50</span><span class="s1">; 
+<a name="l56"><span class="ln">56   </span></a>        capLeftPosition = </span><span class="s3">0.00</span><span class="s1">; 
+<a name="l57"><span class="ln">57   </span></a>        capRightPosition = </span><span class="s3">0.00</span><span class="s1">; 
+<a name="l58"><span class="ln">58   </span></a> 
+<a name="l59"><span class="ln">59   </span></a>    } 
+<a name="l60"><span class="ln">60   </span></a> 
+<a name="l61"><span class="ln">61   </span></a>    @Override 
+<a name="l62"><span class="ln">62   </span></a>    </span><span class="s0">public void </span><span class="s1">loop() { 
+<a name="l63"><span class="ln">63   </span></a> 
+<a name="l64"><span class="ln">64   </span></a>        forward = -gamepad1.left_stick_y; 
+<a name="l65"><span class="ln">65   </span></a>        right = gamepad1.left_stick_x; 
+<a name="l66"><span class="ln">66   </span></a>        spin = gamepad1.right_stick_x; 
+<a name="l67"><span class="ln">67   </span></a> 
+<a name="l68"><span class="ln">68   </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad1.right_bumper || gamepad1.left_bumper) { 
+<a name="l69"><span class="ln">69   </span></a>            forward *= -</span><span class="s3">1</span><span class="s1">; 
+<a name="l70"><span class="ln">70   </span></a>            right *= -</span><span class="s3">1</span><span class="s1">; 
+<a name="l71"><span class="ln">71   </span></a>        } 
+<a name="l72"><span class="ln">72   </span></a> 
+<a name="l73"><span class="ln">73   </span></a>        forward = Range.clip(forward, -</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">); 
+<a name="l74"><span class="ln">74   </span></a>        right = Range.clip(right, -</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">); 
+<a name="l75"><span class="ln">75   </span></a>        spin = Range.clip(spin, -</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">); 
+<a name="l76"><span class="ln">76   </span></a>        spinner = Range.clip(spinner, -</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">); 
+<a name="l77"><span class="ln">77   </span></a>        reeler = Range.clip(reeler, -</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">); 
+<a name="l78"><span class="ln">78   </span></a>        vexes = Range.clip(vexes, -</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">); 
+<a name="l79"><span class="ln">79   </span></a>        cam = Range.clip(cam, -</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">); 
+<a name="l80"><span class="ln">80   </span></a> 
+<a name="l81"><span class="ln">81   </span></a>        robot.move(forward, right, spin); 
+<a name="l82"><span class="ln">82   </span></a> 
+<a name="l83"><span class="ln">83   </span></a>        robot.spinner.setPower(spinner); 
+<a name="l84"><span class="ln">84   </span></a>        robot.reeler.setPower(reeler); 
+<a name="l85"><span class="ln">85   </span></a> 
+<a name="l86"><span class="ln">86   </span></a> 
+<a name="l87"><span class="ln">87   </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad1.dpad_left || gamepad1.x) { 
+<a name="l88"><span class="ln">88   </span></a>            robot.pushSoftButton(-</span><span class="s3">1</span><span class="s1">); 
+<a name="l89"><span class="ln">89   </span></a>        } 
+<a name="l90"><span class="ln">90   </span></a> 
+<a name="l91"><span class="ln">91   </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad1.dpad_right || gamepad1.b) { 
+<a name="l92"><span class="ln">92   </span></a>            robot.pushSoftButton(</span><span class="s3">1</span><span class="s1">); 
+<a name="l93"><span class="ln">93   </span></a>        } 
+<a name="l94"><span class="ln">94   </span></a> 
+<a name="l95"><span class="ln">95   </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad2.a) { 
+<a name="l96"><span class="ln">96   </span></a>            spinner = -gamepad2.left_stick_y; 
+<a name="l97"><span class="ln">97   </span></a>        } 
+<a name="l98"><span class="ln">98   </span></a> 
+<a name="l99"><span class="ln">99   </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad2.b) { 
+<a name="l100"><span class="ln">100  </span></a>            vexes = -gamepad2.left_stick_y * </span><span class="s3">0.5 </span><span class="s1">+ </span><span class="s3">0.5</span><span class="s1">; 
+<a name="l101"><span class="ln">101  </span></a>                robot.lvex.setPosition(vexes); 
+<a name="l102"><span class="ln">102  </span></a>                robot.rvex.setPosition(vexes); 
+<a name="l103"><span class="ln">103  </span></a>        } 
+<a name="l104"><span class="ln">104  </span></a> 
+<a name="l105"><span class="ln">105  </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad2.right_bumper) { 
+<a name="l106"><span class="ln">106  </span></a>            </span><span class="s0">try </span><span class="s1">{ 
+<a name="l107"><span class="ln">107  </span></a>                robot.puncher.setPower(</span><span class="s3">1</span><span class="s1">); 
+<a name="l108"><span class="ln">108  </span></a>            } </span><span class="s0">catch </span><span class="s1">(Exception err) { 
+<a name="l109"><span class="ln">109  </span></a>                <a href="robotconfig.java.html">robotconfig</a>.addlog(dl, </span><span class="s4">&quot;error&quot;</span><span class="s1">, </span><span class="s4">&quot;failed to set power of puncher&quot;</span><span class="s1">); 
+<a name="l110"><span class="ln">110  </span></a>            } 
+<a name="l111"><span class="ln">111  </span></a>        } </span><span class="s0">else </span><span class="s1">{ 
+<a name="l112"><span class="ln">112  </span></a>            </span><span class="s0">try </span><span class="s1">{ 
+<a name="l113"><span class="ln">113  </span></a>                robot.puncher.setPower(</span><span class="s3">0</span><span class="s1">); 
+<a name="l114"><span class="ln">114  </span></a>            } </span><span class="s0">catch </span><span class="s1">(Exception err) { 
+<a name="l115"><span class="ln">115  </span></a>                <a href="robotconfig.java.html">robotconfig</a>.addlog(dl, </span><span class="s4">&quot;error&quot;</span><span class="s1">, </span><span class="s4">&quot;failed to set power of puncher&quot;</span><span class="s1">); 
+<a name="l116"><span class="ln">116  </span></a>            } 
+<a name="l117"><span class="ln">117  </span></a>        } 
+<a name="l118"><span class="ln">118  </span></a> 
+<a name="l119"><span class="ln">119  </span></a>        reeler = -gamepad2.right_stick_y; 
+<a name="l120"><span class="ln">120  </span></a> 
+<a name="l121"><span class="ln">121  </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad2.dpad_up) { 
+<a name="l122"><span class="ln">122  </span></a>            capLeftPosition = </span><span class="s3">0.66</span><span class="s1">; 
+<a name="l123"><span class="ln">123  </span></a>            tiltPosition = </span><span class="s3">1.00</span><span class="s1">; 
+<a name="l124"><span class="ln">124  </span></a>        } 
+<a name="l125"><span class="ln">125  </span></a> 
+<a name="l126"><span class="ln">126  </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad2.dpad_right) { 
+<a name="l127"><span class="ln">127  </span></a>            capLeftPosition = </span><span class="s3">0.90</span><span class="s1">; 
+<a name="l128"><span class="ln">128  </span></a>            tiltPosition = </span><span class="s3">1.00</span><span class="s1">; 
+<a name="l129"><span class="ln">129  </span></a>        } 
+<a name="l130"><span class="ln">130  </span></a> 
+<a name="l131"><span class="ln">131  </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad2.dpad_down) { 
+<a name="l132"><span class="ln">132  </span></a>            capLeftPosition = </span><span class="s3">0.90</span><span class="s1">; 
+<a name="l133"><span class="ln">133  </span></a>            tiltPosition = </span><span class="s3">0.00</span><span class="s1">; 
+<a name="l134"><span class="ln">134  </span></a>        } 
+<a name="l135"><span class="ln">135  </span></a> 
+<a name="l136"><span class="ln">136  </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad2.dpad_left) { 
+<a name="l137"><span class="ln">137  </span></a>            capLeftPosition = </span><span class="s3">0.66</span><span class="s1">; 
+<a name="l138"><span class="ln">138  </span></a>            tiltPosition = </span><span class="s3">0.00</span><span class="s1">; 
+<a name="l139"><span class="ln">139  </span></a>        } 
+<a name="l140"><span class="ln">140  </span></a> 
+<a name="l141"><span class="ln">141  </span></a>        </span><span class="s0">if </span><span class="s1">(gamepad2.left_bumper) { 
+<a name="l142"><span class="ln">142  </span></a>            capLeftPosition = </span><span class="s3">0</span><span class="s1">; 
+<a name="l143"><span class="ln">143  </span></a>            tiltPosition = </span><span class="s3">0.50</span><span class="s1">; 
+<a name="l144"><span class="ln">144  </span></a>        } 
+<a name="l145"><span class="ln">145  </span></a> 
+<a name="l146"><span class="ln">146  </span></a>        tiltPosition = Range.clip(tiltPosition, Tilt_MIN_RANGE, Tilt_MAX_RANGE); 
+<a name="l147"><span class="ln">147  </span></a>        capRightPosition = Range.clip(capRightPosition, capRight_MIN_RANGE, capRight_MAX_RANGE); 
+<a name="l148"><span class="ln">148  </span></a>        capLeftPosition = Range.clip(capLeftPosition, capLeft_MIN_RANGE, capLeft_MAX_RANGE); 
+<a name="l149"><span class="ln">149  </span></a> 
+<a name="l150"><span class="ln">150  </span></a>        robot.tilt.setPosition(tiltPosition); 
+<a name="l151"><span class="ln">151  </span></a>        robot.capLeft.setPosition(capLeftPosition); 
+<a name="l152"><span class="ln">152  </span></a>        robot.capRight.setPosition(capLeftPosition); 
+<a name="l153"><span class="ln">153  </span></a> 
+<a name="l154"><span class="ln">154  </span></a>        telemetry.addData(</span><span class="s4">&quot;Forward&quot;</span><span class="s1">, </span><span class="s4">&quot;%.2f&quot;</span><span class="s1">, forward); 
+<a name="l155"><span class="ln">155  </span></a>        telemetry.addData(</span><span class="s4">&quot;Right&quot;</span><span class="s1">, </span><span class="s4">&quot;%.2f&quot;</span><span class="s1">, right); 
+<a name="l156"><span class="ln">156  </span></a>        telemetry.addData(</span><span class="s4">&quot;Spin&quot;</span><span class="s1">, </span><span class="s4">&quot;%.2f&quot;</span><span class="s1">, spin); 
+<a name="l157"><span class="ln">157  </span></a>        telemetry.addData(</span><span class="s4">&quot;Tilt&quot;</span><span class="s1">, </span><span class="s4">&quot;%.2f&quot;</span><span class="s1">, tiltPosition); 
+<a name="l158"><span class="ln">158  </span></a>        telemetry.addData(</span><span class="s4">&quot;capLeft&quot;</span><span class="s1">, </span><span class="s4">&quot;%.2f&quot;</span><span class="s1">, capLeftPosition); 
+<a name="l159"><span class="ln">159  </span></a>        telemetry.addData(</span><span class="s4">&quot;vexes&quot;</span><span class="s1">, </span><span class="s4">&quot;%.2f&quot;</span><span class="s1">, vexes); 
+<a name="l160"><span class="ln">160  </span></a>    } 
+<a name="l161"><span class="ln">161  </span></a> 
+<a name="l162"><span class="ln">162  </span></a>} 
+<a name="l163"><span class="ln">163  </span></a></span></pre>
+</body>
+</html>
