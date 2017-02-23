@@ -2,15 +2,11 @@
 <head>
 <style>
 .red:valid {
-  background: #FB9898;
+  background: #9898FB;
 }
 
 .green:valid {
   background: #98FB98;
-}
-
-.blue:valid {
-  background: #9898FB;
 }
 
 input[type="checkbox"] {
@@ -44,7 +40,7 @@ save();">
     <tr>
       <h3>
         Match:
-        <input id="matchnumber" name="matchnumber" value="0" class="green" title="matchnumber" type="tel" pattern="\d+" size="3" requiblue>
+        <input id="matchnumber" name="matchnumber" value="0" class="green" title="matchnumber" type="tel" pattern="\d+" size="3" required>
         <button onclick="matchnumber.value--;matchnumber.value=Math.abs(matchnumber.value);load();">
         Previous
         </button>
@@ -60,7 +56,7 @@ save();">
         Team Number:
       </th>
       <th>
-        <input class="blue" id="team" name="team" title="team" type="tel" pattern="\d+" requiblue>
+        <input class="red" id="team" name="team" title="team" type="tel" pattern="\d+" required>
       </th>
     </tr>
     <tr>
@@ -68,8 +64,8 @@ save();">
         High goal balls:
       </th>
       <th>
-        <input class="blue" id="autohighgoal1" name="autohighgoal1" type="checkbox">
-        <input class="blue" id="autohighgoal2" name="autohighgoal2" type="checkbox">
+        <input class="red" id="autohighgoal1" name="autohighgoal1" type="checkbox">
+        <input class="red" id="autohighgoal2" name="autohighgoal2" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -77,8 +73,8 @@ save();">
         Low goal balls:
       </th>
       <th>
-        <input class="blue" id="autolowgoal1" name="autolowgoal1" type="checkbox">
-        <input class="blue" id="autolowgoal2" name="autolowgoal2" type="checkbox">
+        <input class="red" id="autolowgoal1" name="autolowgoal1" type="checkbox">
+        <input class="red" id="autolowgoal2" name="autolowgoal2" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -86,8 +82,8 @@ save();">
         Autonomous Beacons:
       </th>
       <th>
-        <input class="blue" id="autobeacon1" name="autobeacon1" type="checkbox">
-        <input class="blue" id="autobeacon2" name="autobeacon2" type="checkbox">
+        <input class="red" id="autobeacon1" name="autobeacon1" type="checkbox">
+        <input class="red" id="autobeacon2" name="autobeacon2" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -95,8 +91,8 @@ save();">
         Autonomous Parking:
       </th>
       <th>
-        <input class="blue" id="autoparked1" name="autoparked1" type="checkbox">
-        <input class="blue" id="autoparked2" name="autoparked2" type="checkbox">
+        <input class="red" id="autoparked1" name="autoparked1" type="checkbox">
+        <input class="red" id="autoparked2" name="autoparked2" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -104,7 +100,7 @@ save();">
         Autonomous Cap:
       </th>
       <th>
-        <input class="blue" id="autocap" name="autocap" type="checkbox">
+        <input class="red" id="autocap" name="autocap" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -112,7 +108,7 @@ save();">
         Autonomous Total:
       </th>
       <th>
-        <input class="blue" id="auto" name="auto" value="0" type="tel" pattern="\d+">
+        <input class="red" id="auto" name="auto" value="0" type="tel" pattern="\d+">
       </th>
     </tr>
     <tr>
@@ -120,7 +116,7 @@ save();">
         Scores in high goal:
       </th>
       <th>
-        <input class="blue" id="scores" name="scores" value="0" type="tel" pattern="\d+">
+        <input class="red" id="scores" name="scores" value="0" type="tel" pattern="\d+">
       </th>
     </tr>
     <tr>
@@ -128,8 +124,8 @@ save();">
         Increment Buttons:
       </th>
       <th>
-        <input class="blue" onclick="scores.value++;uncheck(this);" type="checkbox">
-        <input class="blue" onclick="scores.value--;uncheck(this);" type="checkbox">
+        <input class="red" onclick="scores.value++;uncheck(this);" type="checkbox">
+        <input class="red" onclick="scores.value--;uncheck(this);" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -137,7 +133,7 @@ save();">
         Scores in low goal:
       </th>
       <th>
-        <input class="blue" id="lowscores" name="lowscores" value="0" type="tel" pattern="\d+">
+        <input class="red" id="lowscores" name="lowscores" value="0" type="tel" pattern="\d+">
       </th>
     </tr>
     <tr>
@@ -145,8 +141,8 @@ save();">
         Increment Buttons:
       </th>
       <th>
-        <input class="blue" onclick="lowscores.value++;uncheck(this);" type="checkbox">
-        <input class="blue" onclick="lowscores.value--;uncheck(this);" type="checkbox">
+        <input class="red" onclick="lowscores.value++;uncheck(this);" type="checkbox">
+        <input class="red" onclick="lowscores.value--;uncheck(this);" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -154,7 +150,7 @@ save();">
         TeleOP Total:
       </th>
       <th>
-        <input class="blue" id="teleop" name="teleop" value="0" type="tel" pattern="\d+">
+        <input class="red" id="teleop" name="teleop" value="0" type="tel" pattern="\d+">
       </th>
     </tr>
     <tr>
@@ -162,7 +158,7 @@ save();">
         Team Number:
       </th>
       <th>
-        <input class="blue" id="team2" title="team" type="tel" pattern="\d+">
+        <input class="red" id="team2" title="team" type="tel" pattern="\d+">
       </th>
     </tr>
     <tr>
@@ -170,7 +166,7 @@ save();">
         Beacon ability:
       </th>
       <th>
-        <input class="blue" id="beacons" name="beacons" value="0" min="0" max="40" type="range">
+        <input class="red" id="beacons" name="beacons" value="0" min="0" max="40" type="range">
       </th>
     </tr>
     <tr>
@@ -178,8 +174,8 @@ save();">
         Cap Ball high/cap:
       </th>
       <th>
-        <input class="blue" id="highcap" name="highcap" type="checkbox">
-        <input class="blue" id="cap" name="cap" type="checkbox">
+        <input class="red" id="highcap" name="highcap" type="checkbox">
+        <input class="red" id="cap" name="cap" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -187,8 +183,8 @@ save();">
         Cap Ball fail/low:
       </th>
       <th>
-        <input class="blue" id="dropcap" name="dropcap" type="checkbox">
-        <input class="blue" id="lowcap" name="lowcap" type="checkbox">
+        <input class="red" id="dropcap" name="dropcap" type="checkbox">
+        <input class="red" id="lowcap" name="lowcap" type="checkbox">
       </th>
     </tr>
     <tr>
@@ -196,7 +192,7 @@ save();">
         End Total:
       </th>
       <th>
-        <input class="blue" id="end" name="end" value="0" type="tel" pattern="\d+">
+        <input class="red" id="end" name="end" value="0" type="tel" pattern="\d+">
       </th>
     </tr>
     <tr>
@@ -204,7 +200,7 @@ save();">
         Total Score:
       </th>
       <th>
-        <input class="blue" id="score" name="score" value="0" type="tel" pattern="\d+">
+        <input class="red" id="score" name="score" value="0" type="tel" pattern="\d+">
       </th>
     </tr>
   </table>
@@ -214,10 +210,10 @@ save();">
 <script>
 window.onerror = function(e, url, line) {
   var ertext = document.createElement('div');
-  var text = document.createTextNode('onerror: ' + e + ' URL:' + url + ' Line:' + (line - 44));
+  var text = document.createTextNode('onerror: ' + e + ' URL:' + url + ' Line:' + (line - 0));
   ertext.appendChild(text);
   document.body.appendChild(ertext);
-  console.error('\nLine ' + (line - 44) + ':');
+  console.error('\nLine ' + (line - 0) + ':');
   return true;
 }
 
