@@ -9,10 +9,6 @@
   background: #98FB98;
 }
 
-.blue:valid {
-  background: #9898FB;
-}
-
 input[type="checkbox"] {
   cursor: pointer;
   -webkit-appearance: none;
@@ -214,10 +210,10 @@ save();">
 <script>
 window.onerror = function(e, url, line) {
   var ertext = document.createElement('div');
-  var text = document.createTextNode('onerror: ' + e + ' URL:' + url + ' Line:' + (line - 44));
+  var text = document.createTextNode('onerror: ' + e + ' URL:' + url + ' Line:' + (line - 0));
   ertext.appendChild(text);
   document.body.appendChild(ertext);
-  console.error('\nLine ' + (line - 44) + ':');
+  console.error('\nLine ' + (line - 0) + ':');
   return true;
 }
 
