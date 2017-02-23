@@ -1,0 +1,306 @@
+<html>
+<head>
+<style>
+.red:valid {
+  background: #FB9898;
+}
+
+.green:valid {
+  background: #98FB98;
+}
+
+.blue:valid {
+  background: #9898FB;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 1px;
+  box-sizing: border-box;
+  position: relative;
+  box-sizing: content-box;
+  width: 72pt;
+  height: 72pt;
+  border-width: 0;
+  transition: all .3s linear;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #2ECC71;
+}
+</style>
+</head>
+<body>
+<form id="input-form" action="" method="POST" target="no-target">
+  <table onchange="team2.value = team.value;
+auto.value = 15 * (+autohighgoal1.checked + autohighgoal2.checked) + 5 * (+autolowgoal1.checked + autolowgoal2.checked) + 30 * (+autobeacon1.checked + autobeacon2.checked) + 5 * (+autoparked1.checked + autoparked2.checked + autocap.checked);
+score.value = +teleop.value + (+auto.value) + (+end.value);
+teleop.value = 5 * +scores.value + 1 * +lowscores.value;
+end.value = +beacons.value + 10 * +lowcap.checked + 20 * +highcap.checked + 40 * +cap.checked - 40 * +dropcap.checked;
+score.value = +teleop.value + (+auto.value) + (+end.value);
+save();">
+    <tr>
+      <h3>
+        Match:
+        <input id="matchnumber" name="matchnumber" value="0" class="green" title="matchnumber" type="tel" pattern="\d+" size="3" requiblue>
+        <button onclick="matchnumber.value--;matchnumber.value=Math.abs(matchnumber.value);load();">
+        Previous
+        </button>
+        <button onclick="matchnumber.value++;matchnumber.value=Math.abs(matchnumber.value);load();">
+        Next
+        </button>
+        <button id="form-submit" type="submit">SUBMIT</button>
+        <p id="input-feedback"></p>
+      </h3>
+    </tr>
+    <tr>
+      <th>
+        Team Number:
+      </th>
+      <th>
+        <input class="blue" id="team" name="team" title="team" type="tel" pattern="\d+" requiblue>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        High goal balls:
+      </th>
+      <th>
+        <input class="blue" id="autohighgoal1" name="autohighgoal1" type="checkbox">
+        <input class="blue" id="autohighgoal2" name="autohighgoal2" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Low goal balls:
+      </th>
+      <th>
+        <input class="blue" id="autolowgoal1" name="autolowgoal1" type="checkbox">
+        <input class="blue" id="autolowgoal2" name="autolowgoal2" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Autonomous Beacons:
+      </th>
+      <th>
+        <input class="blue" id="autobeacon1" name="autobeacon1" type="checkbox">
+        <input class="blue" id="autobeacon2" name="autobeacon2" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Autonomous Parking:
+      </th>
+      <th>
+        <input class="blue" id="autoparked1" name="autoparked1" type="checkbox">
+        <input class="blue" id="autoparked2" name="autoparked2" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Autonomous Cap:
+      </th>
+      <th>
+        <input class="blue" id="autocap" name="autocap" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Autonomous Total:
+      </th>
+      <th>
+        <input class="blue" id="auto" name="auto" value="0" type="tel" pattern="\d+">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Scores in high goal:
+      </th>
+      <th>
+        <input class="blue" id="scores" name="scores" value="0" type="tel" pattern="\d+">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Increment Buttons:
+      </th>
+      <th>
+        <input class="blue" onclick="scores.value++;uncheck(this);" type="checkbox">
+        <input class="blue" onclick="scores.value--;uncheck(this);" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Scores in low goal:
+      </th>
+      <th>
+        <input class="blue" id="lowscores" name="lowscores" value="0" type="tel" pattern="\d+">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Increment Buttons:
+      </th>
+      <th>
+        <input class="blue" onclick="lowscores.value++;uncheck(this);" type="checkbox">
+        <input class="blue" onclick="lowscores.value--;uncheck(this);" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        TeleOP Total:
+      </th>
+      <th>
+        <input class="blue" id="teleop" name="teleop" value="0" type="tel" pattern="\d+">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Team Number:
+      </th>
+      <th>
+        <input class="blue" id="team2" title="team" type="tel" pattern="\d+">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Beacon ability:
+      </th>
+      <th>
+        <input class="blue" id="beacons" name="beacons" value="0" min="0" max="40" type="range">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Cap Ball high/cap:
+      </th>
+      <th>
+        <input class="blue" id="highcap" name="highcap" type="checkbox">
+        <input class="blue" id="cap" name="cap" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Cap Ball fail/low:
+      </th>
+      <th>
+        <input class="blue" id="dropcap" name="dropcap" type="checkbox">
+        <input class="blue" id="lowcap" name="lowcap" type="checkbox">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        End Total:
+      </th>
+      <th>
+        <input class="blue" id="end" name="end" value="0" type="tel" pattern="\d+">
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Total Score:
+      </th>
+      <th>
+        <input class="blue" id="score" name="score" value="0" type="tel" pattern="\d+">
+      </th>
+    </tr>
+  </table>
+</form>
+
+<iframe src="#" id="no-target" name="no-target" style="visibility:hidden;display:none;"></iframe>
+<script>
+window.onerror = function(e, url, line) {
+  var ertext = document.createElement('div');
+  var text = document.createTextNode('onerror: ' + e + ' URL:' + url + ' Line:' + (line - 44));
+  ertext.appendChild(text);
+  document.body.appendChild(ertext);
+  console.error('\nLine ' + (line - 44) + ':');
+  return true;
+}
+
+function log(txt) {
+  var ertext = document.createElement('div');
+  var text = document.createTextNode(txt);
+  console.log(txt);
+  ertext.appendChild(text);
+  document.body.appendChild(ertext);
+}
+
+function fadeout(el) {
+  el.style.opacity = 1;
+  (function fade() {
+    if ((el.style.opacity -= .02) < 0) {
+      el.style.display = "none";
+      el.style.pointerEvents = "none";
+    } else {
+      requestAnimationFrame(fade);
+    }
+  })();
+}
+
+function fadein(el) {
+  el.style.opacity = 0;
+  el.style.display = "block";
+  el.style.pointerEvents = "auto";
+
+  (function fade() {
+    var val = parseFloat(el.style.opacity);
+    if (!((val += .02) > 1)) {
+      el.style.opacity = val;
+      requestAnimationFrame(fade);
+    }
+  })();
+}
+
+function uncheck(e) {
+  setTimeout(function() {
+    e.checked = false;
+  }, 300);
+}
+
+var savelist = [];
+
+function load() {
+  $('#team').val('0');
+  $('#auto').val('0');
+  $('#scores').val('0');
+  $('#lowscores').val('0');
+  $('#teleop').val('0');
+  $('#beacons').val('0');
+  $('#end').val('0');
+  $('#score').val('0');
+  $('#autohighgoal1').prop('checked', false);
+  $('#autohighgoal2').prop('checked', false);
+  $('#autolowgoal1').prop('checked', false);
+  $('#autolowgoal2').prop('checked', false);
+  $('#autobeacon1').prop('checked', false);
+  $('#autobeacon2').prop('checked', false);
+  $('#autoparked1').prop('checked', false);
+  $('#autoparked2').prop('checked', false);
+  $('#autocap').prop('checked', false);
+  $('#highcap').prop('checked', false);
+  $('#cap').prop('checked', false);
+  $('#lowcap').prop('checked', false);
+  $('#input-feedback').text('¯\_(ツ)_/¯');
+}
+
+function save() {
+
+}
+
+$('#input-form').one('submit', function() {
+  var baseURL = 'https://docs.google.com/a/bps101.net/forms/d/e/1FAIpQLSfzi__elxeOhAET8tuPuH_dmzCiUa625GxGvIwvf632PA73Ag/formResponse?';
+
+  var submitRef = 'submit=663023135418128828';
+  var queryURL = 'entry.2206133=' + encodeURIComponent($('#matchnumber').val().toString()) + '&' + 'entry.1025132587=' + encodeURIComponent($('#team').val().toString()) + '&' + 'entry.537985807=' + encodeURIComponent($('#autohighgoal1').is(':checked')) + '&' + 'entry.1734577266=' + encodeURIComponent($('#autohighgoal2').is(':checked')) + '&' + 'entry.1633615514=' + encodeURIComponent($('#autolowgoal1').is(':checked')) + '&' + 'entry.654137890=' + encodeURIComponent($('#autolowgoal2').is(':checked')) + '&' + 'entry.1174682267=' + encodeURIComponent($('#autobeacon1').is(':checked')) + '&' + 'entry.1739531178=' + encodeURIComponent($('#autobeacon2').is(':checked')) + '&' + 'entry.1329075965=' + encodeURIComponent($('#autoparked1').is(':checked')) + '&' + 'entry.1529431589=' + encodeURIComponent($('#autoparked2').is(':checked')) + '&' + 'entry.1557956032=' + encodeURIComponent($('#autocap').is(':checked')) + '&' + 'entry.600209588=' + encodeURIComponent($('#auto').val().toString()) + '&' + 'entry.1249218981=' + encodeURIComponent($('#scores').val().toString()) + '&' + 'entry.614703251=' + encodeURIComponent($('#lowscores').val().toString()) + '&' + 'entry.1732237727=' + encodeURIComponent($('#teleop').val().toString()) + '&' + 'entry.1704290970=' + encodeURIComponent($('#beacons').val().toString()) + '&' + 'entry.1967158195=' + encodeURIComponent($('#highcap').is(':checked')) + '&' + 'entry.1297570199=' + encodeURIComponent($('#cap').is(':checked')) + '&' + 'entry.21995683=' + encodeURIComponent($('#lowcap').is(':checked')) + '&' + 'entry.1112084387=' + encodeURIComponent($('#end').val().toString()) + '&' + 'entry.1430973798=' + encodeURIComponent($('#score').val().toString()) + '&';
+  var submitURL = (baseURL + queryURL + submitRef);
+  $(this)[0].action = submitURL;
+  $('#input-feedback').text('Submitted');
+});
+
+</script>
+</body>
+</html>
