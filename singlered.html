@@ -42,12 +42,8 @@ save();">
       <h3>
         Match:
         <input id="matchnumber" name="matchnumber" value="0" class="green" title="matchnumber" type="tel" pattern="\d+" size="3" required>
-        <button onclick="matchnumber.value--;matchnumber.value=Math.abs(matchnumber.value);load();">
-        Previous
-        </button>
-        <button onclick="matchnumber.value++;matchnumber.value=Math.abs(matchnumber.value);load();">
-        Next
-        </button>
+        <input onclick="matchnumber.value--;matchnumber.value=Math.abs(matchnumber.value);load();uncheck(this);" type="checkbox">
+        <input onclick="matchnumber.value++;matchnumber.value=Math.abs(matchnumber.value);load();uncheck(this);" type="checkbox">
         <button id="form-submit" type="submit">SUBMIT</button>
         <p id="input-feedback"></p>
       </h3>
