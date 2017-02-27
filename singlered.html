@@ -289,7 +289,7 @@ $("#form-submit").click(function(){
   var submitURL = (baseURL + queryURL + submitRef);
   if($('#team').val() > 1) {
     $.get(submitURL, function(data, status){
-        $('#input-feedback').text("Data: " + data + "\nStatus: " + status);
+        $('#input-feedback').text("Data: " + data.toString() + "\nStatus: " + status.toString());
     });
   }
 });
