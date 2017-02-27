@@ -30,7 +30,6 @@ input[type="checkbox"]:checked {
 </head>
 <body>
   <script src="//code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<form id="input-form" action="" method="POST" target="no-target">
   <table onchange="team2.value = team.value;
 auto.value = 15 * (+autohighgoal1.checked + autohighgoal2.checked) + 5 * (+autolowgoal1.checked + autolowgoal2.checked) + 30 * (+autobeacon1.checked + autobeacon2.checked) + 5 * (+autoparked1.checked + autoparked2.checked + autocap.checked);
 score.value = +teleop.value + (+auto.value) + (+end.value);
@@ -44,7 +43,7 @@ save();">
         <input id="matchnumber" name="matchnumber" value="0" class="green" title="matchnumber" type="tel" pattern="\d+" size="3" required>
         <input onclick="matchnumber.value--;matchnumber.value=Math.abs(matchnumber.value);load();uncheck(this);" type="checkbox">
         <input onclick="matchnumber.value++;matchnumber.value=Math.abs(matchnumber.value);load();uncheck(this);" type="checkbox">
-        <button id="form-submit" type="submit">SUBMIT</button>
+        <button id="form-submit">SUBMIT</button>
         <p id="input-feedback"></p>
       </h3>
     </tr>
@@ -201,9 +200,7 @@ save();">
       </th>
     </tr>
   </table>
-</form>
 
-<iframe src="#" id="no-target" name="no-target" style="visibility:hidden;display:none;"></iframe>
 <script>
 window.onerror = function(e, url, line) {
   var ertext = document.createElement('div');
@@ -284,15 +281,16 @@ function save() {
 
 }
 
-$('#input-form').one('submit', function() {
+$("button").click(function(){
   var baseURL = 'https://docs.google.com/a/bps101.net/forms/d/e/1FAIpQLSfzi__elxeOhAET8tuPuH_dmzCiUa625GxGvIwvf632PA73Ag/formResponse?';
 
   var submitRef = 'submit=663023135418128828';
   var queryURL = 'entry.2206133=' + encodeURIComponent($('#matchnumber').val().toString()) + '&' + 'entry.1025132587=' + encodeURIComponent($('#team').val().toString()) + '&' + 'entry.537985807=' + encodeURIComponent($('#autohighgoal1').is(':checked')) + '&' + 'entry.1734577266=' + encodeURIComponent($('#autohighgoal2').is(':checked')) + '&' + 'entry.1633615514=' + encodeURIComponent($('#autolowgoal1').is(':checked')) + '&' + 'entry.654137890=' + encodeURIComponent($('#autolowgoal2').is(':checked')) + '&' + 'entry.1174682267=' + encodeURIComponent($('#autobeacon1').is(':checked')) + '&' + 'entry.1739531178=' + encodeURIComponent($('#autobeacon2').is(':checked')) + '&' + 'entry.1329075965=' + encodeURIComponent($('#autoparked1').is(':checked')) + '&' + 'entry.1529431589=' + encodeURIComponent($('#autoparked2').is(':checked')) + '&' + 'entry.1557956032=' + encodeURIComponent($('#autocap').is(':checked')) + '&' + 'entry.600209588=' + encodeURIComponent($('#auto').val().toString()) + '&' + 'entry.1249218981=' + encodeURIComponent($('#scores').val().toString()) + '&' + 'entry.614703251=' + encodeURIComponent($('#lowscores').val().toString()) + '&' + 'entry.1732237727=' + encodeURIComponent($('#teleop').val().toString()) + '&' + 'entry.1704290970=' + encodeURIComponent($('#beacons').val().toString()) + '&' + 'entry.1967158195=' + encodeURIComponent($('#highcap').is(':checked')) + '&' + 'entry.1297570199=' + encodeURIComponent($('#cap').is(':checked')) + '&' + 'entry.21995683=' + encodeURIComponent($('#lowcap').is(':checked')) + '&' + 'entry.1112084387=' + encodeURIComponent($('#end').val().toString()) + '&' + 'entry.1430973798=' + encodeURIComponent($('#score').val().toString()) + '&';
   var submitURL = (baseURL + queryURL + submitRef);
   if($('#team').val() > 1) {
-  $(this)[0].action = submitURL;
-  $('#input-feedback').text('Submitted');
+    $.get(submitURL, function(data, status){
+        $('#input-feedback').text("Data: " + data + "\nStatus: " + status);
+    });
   }
 });
 
