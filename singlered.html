@@ -287,11 +287,15 @@ $("#form-submit").click(function(){
   var submitRef = 'submit=663023135418128828';
   var queryURL = 'entry.2206133=' + encodeURIComponent($('#matchnumber').val().toString()) + '&' + 'entry.1025132587=' + encodeURIComponent($('#team').val().toString()) + '&' + 'entry.537985807=' + encodeURIComponent($('#autohighgoal1').is(':checked')) + '&' + 'entry.1734577266=' + encodeURIComponent($('#autohighgoal2').is(':checked')) + '&' + 'entry.1633615514=' + encodeURIComponent($('#autolowgoal1').is(':checked')) + '&' + 'entry.654137890=' + encodeURIComponent($('#autolowgoal2').is(':checked')) + '&' + 'entry.1174682267=' + encodeURIComponent($('#autobeacon1').is(':checked')) + '&' + 'entry.1739531178=' + encodeURIComponent($('#autobeacon2').is(':checked')) + '&' + 'entry.1329075965=' + encodeURIComponent($('#autoparked1').is(':checked')) + '&' + 'entry.1529431589=' + encodeURIComponent($('#autoparked2').is(':checked')) + '&' + 'entry.1557956032=' + encodeURIComponent($('#autocap').is(':checked')) + '&' + 'entry.600209588=' + encodeURIComponent($('#auto').val().toString()) + '&' + 'entry.1249218981=' + encodeURIComponent($('#scores').val().toString()) + '&' + 'entry.614703251=' + encodeURIComponent($('#lowscores').val().toString()) + '&' + 'entry.1732237727=' + encodeURIComponent($('#teleop').val().toString()) + '&' + 'entry.1704290970=' + encodeURIComponent($('#beacons').val().toString()) + '&' + 'entry.1967158195=' + encodeURIComponent($('#highcap').is(':checked')) + '&' + 'entry.1297570199=' + encodeURIComponent($('#cap').is(':checked')) + '&' + 'entry.21995683=' + encodeURIComponent($('#lowcap').is(':checked')) + '&' + 'entry.1112084387=' + encodeURIComponent($('#end').val().toString()) + '&' + 'entry.1430973798=' + encodeURIComponent($('#score').val().toString()) + '&';
   var submitURL = (baseURL + queryURL + submitRef);
-  if($('#team').val() > 1) {
-    $.get(submitURL, function(data, status){
-        $('#input-feedback').text("Data: " + data.toString() + "\nStatus: " + status.toString());
-    });
-  }
+    var jqxhr = $.get(submitURL, function() {
+  $('#input-feedback').text( "submitting" );
+})
+  .done(function() {
+    $('#input-feedback').text( "submitted match " + $('#matchnumber').val().toString() +": " + $('#team').val().toString() );
+  })
+  .fail(function() {
+    $('#input-feedback').text( "error" );
+  });
 });
 
 </script>
