@@ -34,7 +34,7 @@ input[type="checkbox"]:checked {
 auto.value = 15 * (+autohighgoal1.checked + autohighgoal2.checked) + 5 * (+autolowgoal1.checked + autolowgoal2.checked) + 30 * (+autobeacon1.checked + autobeacon2.checked) + 5 * (+autoparked1.checked + autoparked2.checked + autocap.checked);
 score.value = +teleop.value + (+auto.value) + (+end.value);
 teleop.value = 5 * +scores.value + 1 * +lowscores.value;
-end.value = +beacons.value + 10 * +lowcap.checked + 20 * +highcap.checked + 40 * +cap.checked - 40 * +dropcap.checked;
+end.value = +beacons.value + 10 * +lowcap.checked + 20 * +highcap.checked + 40 * +cap.checked - 40 * +failcap.checked;
 score.value = +teleop.value + (+auto.value) + (+end.value);
 save();">
     <tr>
