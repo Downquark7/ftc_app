@@ -218,6 +218,17 @@ function log(txt) {
   ertext.appendChild(text);
   document.body.appendChild(ertext);
 }
+  
+function log(txt1, txt2) {
+  log(txt1);
+  log(txt2);
+}
+  
+function log(txt1, txt2, txt3) {
+  log(txt1);
+  log(txt2);
+  log(txt3);
+}
 
 function fadeout(el) {
   el.style.opacity = 1;
@@ -289,7 +300,7 @@ $("#form-submit").click(function(){
   var queryURL = 'entry.2206133=' + encodeURIComponent($('#matchnumber').val().toString()) + '&' + 'entry.1025132587=' + encodeURIComponent($('#team').val().toString()) + '&' + 'entry.537985807=' + encodeURIComponent($('#autohighgoal1').is(':checked')) + '&' + 'entry.1734577266=' + encodeURIComponent($('#autohighgoal2').is(':checked')) + '&' + 'entry.1633615514=' + encodeURIComponent($('#autolowgoal1').is(':checked')) + '&' + 'entry.654137890=' + encodeURIComponent($('#autolowgoal2').is(':checked')) + '&' + 'entry.1174682267=' + encodeURIComponent($('#autobeacon1').is(':checked')) + '&' + 'entry.1739531178=' + encodeURIComponent($('#autobeacon2').is(':checked')) + '&' + 'entry.1329075965=' + encodeURIComponent($('#autoparked1').is(':checked')) + '&' + 'entry.1529431589=' + encodeURIComponent($('#autoparked2').is(':checked')) + '&' + 'entry.1557956032=' + encodeURIComponent($('#autocap').is(':checked')) + '&' + 'entry.600209588=' + encodeURIComponent($('#auto').val().toString()) + '&' + 'entry.1249218981=' + encodeURIComponent($('#scores').val().toString()) + '&' + 'entry.614703251=' + encodeURIComponent($('#lowscores').val().toString()) + '&' + 'entry.1732237727=' + encodeURIComponent($('#teleop').val().toString()) + '&' + 'entry.1704290970=' + encodeURIComponent($('#beacons').val().toString()) + '&' + 'entry.1967158195=' + encodeURIComponent($('#highcap').is(':checked')) + '&' + 'entry.1297570199=' + encodeURIComponent($('#cap').is(':checked')) + '&' + 'entry.21995683=' + encodeURIComponent($('#lowcap').is(':checked')) + '&' + 'entry.1852789835=' + encodeURIComponent($('#failcap').is(':checked')) + '&' + 'entry.1112084387=' + encodeURIComponent($('#end').val().toString()) + '&' + 'entry.1430973798=' + encodeURIComponent($('#score').val().toString()) + '&';
   var submitURL = (baseURL + queryURL + submitRef);
   var jqxhr = $.get(submitURL, log).always(function() {
-    $('#input-feedback').text("submitting match " + $('#matchnumber').val().toString() +": " + $('#team').val().toString() );
+    $('#input-feedback').text("submited match " + $('#matchnumber').val().toString() +": " + $('#team').val().toString() );
   });
 });
 
