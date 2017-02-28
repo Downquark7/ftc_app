@@ -1,5 +1,12 @@
 
 <html>
+   <head>
+      <script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>
+   </head>
 <body>
 <style>
     * {
@@ -9,10 +16,9 @@
 iframe {
     float: left;
     width: 50%;
-    height: 170%;
 }
 </style>
-   <iframe src="doubleblue.html"></iframe>
-<iframe src="doublered.html"></iframe>
+   <iframe src="doubleblue.html" frameborder="0" scrolling="no" onload="resizeIframe(this)" onresize="resizeIframe(this)"></iframe>
+<iframe src="doublered.html" frameborder="0" scrolling="no" onload="resizeIframe(this)" onresize="resizeIframe(this)"></iframe>
 </body>
 </html>
